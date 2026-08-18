@@ -47,11 +47,14 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'task_manager',
+    'django_tailwind_cli',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -115,7 +118,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = "ru"
+
+LANGUAGES = [
+    ("ru", "Русский"),
+]
+
+LOCALE_PATHS = [
+    BASE_DIR / "locale",
+]
 
 TIME_ZONE = 'UTC'
 
@@ -127,7 +138,25 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = "static/"
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
+
+STATICFILES_DIRS = [BASE_DIR / "assets"]
+
+TAILWIND_CLI_SRC_CSS = "tailwind/source.css"
+
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": (
+            "whitenoise.storage."
+            "CompressedManifestStaticFilesStorage"
+        ),
+    },
+}
 
 
 # Email

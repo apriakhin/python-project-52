@@ -4,3 +4,7 @@ __pycache__/
 .env
 .coverage
 htmlcov/
+assets/
+staticfiles/
+.django_tailwind_cli/
+locale/**/LC_MESSAGES/*.mo

@@ -1,0 +1,87 @@
+{% load i18n tailwind_cli %}
+{% get_current_language as LANGUAGE_CODE %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% translate "Task manager" %}{% endblock %}</title>
+    {% tailwind_css %}
+  </head>
+
+  <body class="m-0 bg-white font-sans text-gray-900">
+    <div class="flex min-h-screen flex-col">
+      <header class="h-14 shrink-0 bg-gray-100">
+        <nav class="flex h-full items-center justify-between px-6">
+          <div class="flex items-center gap-6">
+            <a
+              href="{% url 'index' %}"
+              class="rounded-sm text-lg font-bold leading-6"
+            >
+              {% translate "Task manager" %}
+            </a>
+
+            <a
+              href="#"
+              class="rounded-sm text-base leading-5 transition-colors hover:text-blue-600"
+            >
+              {% translate "Users" %}
+            </a>
+          </div>
+
+          <div class="flex items-center gap-4">
+            <a
+              href="#"
+              class="rounded-sm text-base leading-5 transition-colors hover:text-blue-600"
+            >
+              {% translate "Log in" %}
+            </a>
+
+            <a
+              href="#"
+              class="rounded-sm text-base leading-5 transition-colors hover:text-blue-600"
+            >
+              {% translate "Sign up" %}
+            </a>
+          </div>
+        </nav>
+      </header>
+
+      <main class="mx-auto w-full max-w-5xl flex-1">
+        {% if messages %}
+          <div class="space-y-3 pt-4">
+            {% for message in messages %}
+              <div
+                role="alert"
+                class="flex min-h-12 items-center rounded border px-4 py-3
+                       text-base leading-6
+
+                  {% if 'success' in message.tags %}
+                    border-green-300 bg-green-50 text-green-800
+                  {% elif 'error' in message.tags %}
+                    border-red-300 bg-red-50 text-red-800
+                  {% elif 'warning' in message.tags %}
+                    border-amber-300 bg-amber-50 text-amber-900
+                  {% else %}
+                    border-blue-300 bg-blue-50 text-blue-800
+                  {% endif %}"
+              >
+                {{ message }}
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+      </main>
+
+      <footer
+        class="mx-auto h-20 w-full max-w-5xl shrink-0
+               border-t border-gray-300 pt-5 text-base leading-6"
+      >
+        Hexlet
+      </footer>
+    </div>
+  </body>
+</html>
