@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/6.1/ref/settings/
 
 import os
 from pathlib import Path
+
+from django.utils.translation import gettext_lazy as _
 from dotenv import load_dotenv
 import dj_database_url
 
@@ -32,7 +34,7 @@ DEBUG = os.getenv('DEBUG', 'False') == 'True'
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'python-project-52-0wbl.onrender.com', 
+    'python-project-52-0wbl.onrender.com',
     'webserver',
 ]
 
@@ -46,8 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'task_manager',
     'django_tailwind_cli',
+    'task_manager',
+    'users',
 ]
 
 MIDDLEWARE = [
@@ -101,31 +104,31 @@ DATABASES['default'].update(db_from_env)
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': (
+            'django.contrib.auth.password_validation.MinimumLengthValidator'
+        ),
+        'OPTIONS': {
+            'min_length': 3,
+        },
     },
 ]
+
+LOGIN_URL = 'login'
+
+LOGIN_REDIRECT_URL = 'index'
 
 
 # Internationalization
 # https://docs.djangoproject.com/en/6.1/topics/i18n/
 
-LANGUAGE_CODE = "ru"
+LANGUAGE_CODE = 'ru'
 
 LANGUAGES = [
-    ("ru", "Русский"),
+    ('ru', _('Russian')),
 ]
 
 LOCALE_PATHS = [
-    BASE_DIR / "locale",
+    BASE_DIR / 'locale',
 ]
 
 TIME_ZONE = 'UTC'
@@ -138,23 +141,20 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/6.1/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = 'static/'
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-STATICFILES_DIRS = [BASE_DIR / "assets"]
+STATICFILES_DIRS = [BASE_DIR / 'assets']
 
-TAILWIND_CLI_SRC_CSS = "tailwind/source.css"
+TAILWIND_CLI_SRC_CSS = 'tailwind/source.css'
 
 STORAGES = {
-    "default": {
-        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    'default': {
+        'BACKEND': 'django.core.files.storage.FileSystemStorage',
     },
-    "staticfiles": {
-        "BACKEND": (
-            "whitenoise.storage."
-            "CompressedManifestStaticFilesStorage"
-        ),
+    'staticfiles': {
+        'BACKEND': ('whitenoise.storage.CompressedManifestStaticFilesStorage'),
     },
 }
 

@@ -7,11 +7,11 @@ build:
 migrate:
 	uv run manage.py migrate
 
-compilemessages:
-	uv run manage.py compilemessages --locale ru --ignore=.venv --verbosity 0
-
 tailwind-build:
 	uv run manage.py tailwind build --force
+
+compilemessages:
+	uv run manage.py compilemessages --locale ru --ignore=.venv --verbosity 0
 
 collectstatic: tailwind-build compilemessages
 	uv run manage.py collectstatic --noinput
@@ -24,3 +24,8 @@ render-start:
 
 lint:
 	uv run ruff check .
+
+test:
+	uv run manage.py test --settings=task_manager.test_settings
+
+check: lint test

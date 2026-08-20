@@ -7,5 +7,4 @@ source "$HOME/.local/bin/env"
 
 make install
 make migrate
-make compilemessages
 make collectstatic

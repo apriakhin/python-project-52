@@ -1,0 +1,181 @@
+{% extends "base.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Registration" %}{% endblock %}
+
+{% block content %}
+    <section class="my-6">
+        <h1 class="mb-6 text-3xl font-bold leading-9">
+            {% translate "Registration" %}
+        </h1>
+
+        <form method="post" class="w-1/2 space-y-4">
+            {% csrf_token %}
+
+            {% for hidden_field in form.hidden_fields %}
+                {{ hidden_field }}
+            {% endfor %}
+
+            {% if form.non_field_errors %}
+                <div
+                    role="alert"
+                    class="rounded border border-red-300 bg-red-50 px-4 py-3 text-red-800"
+                >
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <div>
+                <label
+                    for="{{ form.first_name.id_for_label }}"
+                    class="mb-1 block text-base leading-5"
+                >
+                    {% translate "First name" %}:
+                </label>
+
+                <input
+                    type="text"
+                    name="{{ form.first_name.html_name }}"
+                    value="{{ form.first_name.value|default_if_none:'' }}"
+                    id="{{ form.first_name.id_for_label }}"
+                    class="block w-full"
+                    maxlength="150"
+                    autocomplete="given-name"
+                    autofocus
+                >
+
+                {% for error in form.first_name.errors %}
+                    <p role="alert" class="mt-1 text-sm text-red-700">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </div>
+
+            <div>
+                <label
+                    for="{{ form.last_name.id_for_label }}"
+                    class="mb-1 block text-base leading-5"
+                >
+                    {% translate "Last name" %}:
+                </label>
+
+                <input
+                    type="text"
+                    name="{{ form.last_name.html_name }}"
+                    value="{{ form.last_name.value|default_if_none:'' }}"
+                    id="{{ form.last_name.id_for_label }}"
+                    class="block w-full"
+                    maxlength="150"
+                    autocomplete="family-name"
+                >
+
+                {% for error in form.last_name.errors %}
+                    <p role="alert" class="mt-1 text-sm text-red-700">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </div>
+
+            <div>
+                <label
+                    for="{{ form.username.id_for_label }}"
+                    class="mb-1 block text-base leading-5"
+                >
+                    {% translate "Username" %}:
+                </label>
+
+                {% if form.username.help_text %}
+                    <div class="mb-1 text-sm leading-5 text-slate-500">
+                        {{ form.username.help_text|safe }}
+                    </div>
+                {% endif %}
+
+                <input
+                    type="text"
+                    name="{{ form.username.html_name }}"
+                    value="{{ form.username.value|default_if_none:'' }}"
+                    id="{{ form.username.id_for_label }}"
+                    class="block w-full"
+                    maxlength="150"
+                    autocomplete="username"
+                    required
+                >
+
+                {% for error in form.username.errors %}
+                    <p role="alert" class="mt-1 text-sm text-red-700">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </div>
+
+            <div>
+                <label
+                    for="{{ form.password1.id_for_label }}"
+                    class="mb-1 block text-base leading-5"
+                >
+                    {% translate "Password" %}:
+                </label>
+
+                {% if form.password1.help_text %}
+                    <div class="mb-1 text-sm leading-5 text-slate-500">
+                        {{ form.password1.help_text|safe }}
+                    </div>
+                {% endif %}
+
+                <input
+                    type="password"
+                    name="{{ form.password1.html_name }}"
+                    id="{{ form.password1.id_for_label }}"
+                    class="block w-full"
+                    autocomplete="new-password"
+                    required
+                >
+
+                {% for error in form.password1.errors %}
+                    <p role="alert" class="mt-1 text-sm text-red-700">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </div>
+
+            <div>
+                <label
+                    for="{{ form.password2.id_for_label }}"
+                    class="mb-1 block text-base leading-5"
+                >
+                    {% translate "Password confirmation" %}:
+                </label>
+
+                {% if form.password2.help_text %}
+                    <div class="mb-1 text-sm leading-5 text-slate-500">
+                        {{ form.password2.help_text|safe }}
+                    </div>
+                {% endif %}
+
+                <input
+                    type="password"
+                    name="{{ form.password2.html_name }}"
+                    id="{{ form.password2.id_for_label }}"
+                    class="block w-full"
+                    autocomplete="new-password"
+                    required
+                >
+
+                {% for error in form.password2.errors %}
+                    <p role="alert" class="mt-1 text-sm text-red-700">
+                        {{ error }}
+                    </p>
+                {% endfor %}
+            </div>
+
+            <button
+                type="submit"
+                class="rounded bg-blue-600 px-4 py-2 text-base text-white hover:bg-blue-700"
+            >
+                {% translate "Register" %}
+            </button>
+        </form>
+    </section>
+{% endblock %}

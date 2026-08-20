@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @plugin "@tailwindcss/forms" {
-  strategy: "base";
+    strategy: "base";
 }
 
 @source "../task_manager";

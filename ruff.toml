@@ -8,3 +8,6 @@ exclude = ["migrations", "settings.py", "manage.py"]
 [lint]
 preview = true
 select = ["E", "F", "C90"]
+
+[format]
+quote-style = "single"
