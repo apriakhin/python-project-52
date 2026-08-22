@@ -1,0 +1,10 @@
+{% extends "layout/page.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Delete user" %}{% endblock %}
+
+{% block page_heading %}{% translate "Delete user" %}{% endblock %}
+
+{% block page_content %}
+    {% include "layout/delete_confirmation.html" with object_name=object.get_full_name|default:object.username %}
+{% endblock %}

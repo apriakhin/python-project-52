@@ -1,11 +1,11 @@
 {% extends "layout/page.html" %}
 {% load i18n %}
 
-{% block title %}{% translate "Log in" %}{% endblock %}
+{% block title %}{% translate "Edit status" %}{% endblock %}
 
-{% block page_heading %}{% translate "Log in" %}{% endblock %}
+{% block page_heading %}{% translate "Edit status" %}{% endblock %}
 
 {% block page_content %}
-    {% translate "Sign in" as submit_label %}
+{% translate "Edit" as submit_label %}
     {% include "layout/form.html" with form=form submit_label=submit_label %}
 {% endblock %}

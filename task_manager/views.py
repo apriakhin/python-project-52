@@ -4,6 +4,8 @@ from django.contrib import messages
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
+from .forms import LoginForm
+
 
 class IndexView(TemplateView):
     template_name = 'index.html'
@@ -11,6 +13,7 @@ class IndexView(TemplateView):
 
 class LoginView(LoginView):
     template_name = 'login.html'
+    authentication_form = LoginForm
     next_page = reverse_lazy('index')
     redirect_authenticated_user = True
 

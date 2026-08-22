@@ -1,0 +1,13 @@
+{% load i18n %}
+
+<p class="mb-6 text-base">
+    {% blocktranslate with name=object_name %}Are you sure you want to delete {{ name }}?{% endblocktranslate %}
+</p>
+
+<form method="post">
+    {% csrf_token %}
+
+    <button type="submit" class="rounded bg-red-600 px-4 py-2 text-white hover:bg-red-700">
+        {% translate "Yes, delete" %}
+    </button>
+</form>

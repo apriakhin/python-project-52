@@ -1,0 +1,45 @@
+<form method="post" class="w-1/2 space-y-4">
+    {% csrf_token %}
+
+    {% for hidden_field in form.hidden_fields %}
+    {{ hidden_field }}
+    {% endfor %}
+
+    {% if form.non_field_errors %}
+    <div role="alert" class="rounded border border-red-300 bg-red-50 px-4 py-3 text-red-800">
+        {% for error in form.non_field_errors %}
+        <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    {% for field in form.visible_fields %}
+    <div>
+        <label for="{{ field.id_for_label }}" class="mb-1 block text-base leading-5">
+            {{ field.label }}:
+        </label>
+
+        {% if field.help_text %}
+        <div class="mb-1 text-sm leading-5 text-slate-500">
+            {{ field.help_text|safe }}
+        </div>
+        {% endif %}
+
+        {{ field }}
+
+        {% for error in field.errors %}
+        <p role="alert" class="mt-1 text-sm text-red-700">
+            {{ error }}
+        </p>
+        {% endfor %}
+    </div>
+    {% endfor %}
+
+    {% if next %}
+    <input type="hidden" name="next" value="{{ next }}">
+    {% endif %}
+
+    <button type="submit" class="rounded bg-blue-600 px-4 py-2 text-base text-white hover:bg-blue-700">
+        {{ submit_label }}
+    </button>
+</form>

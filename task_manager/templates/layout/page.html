@@ -1,0 +1,11 @@
+{% extends "layout/base.html" %}
+
+{% block content %}
+<section class="my-6">
+    <h1 class="mb-6 text-3xl font-bold">
+        {% block page_heading %}{% endblock %}
+    </h1>
+
+    {% block page_content %}{% endblock %}
+</section>
+{% endblock %}

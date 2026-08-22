@@ -4,6 +4,9 @@ install:
 build:
 	./build.sh
 
+makemigrations:
+	uv run manage.py makemigrations
+
 migrate:
 	uv run manage.py migrate
 

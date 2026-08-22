@@ -1,0 +1,21 @@
+{% extends "layout/page.html" %}
+
+{% block page_content %}
+{% block page_actions %}{% endblock %}
+
+<table class="mt-6 w-full {% block table_layout %}table-auto{% endblock %} border-collapse text-left">
+    <thead class="border-b border-gray-300">
+        <tr>
+            {% block table_columns %}{% endblock %}
+        </tr>
+    </thead>
+
+    <tbody>
+        {% for item in object_list %}
+        {% block table_row %}{% endblock %}
+        {% empty %}
+        {% block table_empty %}{% endblock %}
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

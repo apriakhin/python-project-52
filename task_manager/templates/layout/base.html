@@ -26,6 +26,15 @@
                     >
                         {% translate "Users" %}
                     </a>
+
+                    {% if user.is_authenticated %}
+                        <a
+                            href="{% url 'statuses_index' %}"
+                            class="rounded-sm text-base leading-5 transition-colors hover:text-blue-600"
+                        >
+                            {% translate "Statuses" %}
+                        </a>
+                    {% endif %}
                 </div>
 
                 <div class="flex items-center gap-4">
