@@ -1,0 +1,5 @@
+{% extends "layout/page.html" %}
+{% load i18n %}
+{% block title %}{% translate "Edit label" %}{% endblock %}
+{% block page_heading %}{% translate "Edit label" %}{% endblock %}
+{% block page_content %}{% include "layout/form.html" with submit_label=_("Edit") %}{% endblock %}

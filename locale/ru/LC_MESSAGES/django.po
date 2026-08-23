@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Task Manager 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-22 22:00+0000\n"
+"POT-Creation-Date: 2026-08-23 13:05+0000\n"
 "PO-Revision-Date: 2026-08-18 19:01+0000\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -17,10 +17,104 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
+#: labels/forms.py:11 labels/templates/labels/index.html:15
 #: statuses/forms.py:11 statuses/templates/statuses/index.html:23
 #: tasks/forms.py:13 tasks/templates/tasks/index.html:19
 msgid "Name"
 msgstr "Имя"
+
+#: labels/forms.py:13
+#| msgid "A task with this name already exists."
+msgid "A label with this name already exists."
+msgstr "Метка с таким именем уже существует."
+
+#: labels/templates/labels/create.html:3 labels/templates/labels/create.html:4
+#: labels/templates/labels/index.html:9 labels/tests.py:42
+#| msgid "Create task"
+msgid "Create label"
+msgstr "Создать метку"
+
+#: labels/templates/labels/create.html:5
+#: statuses/templates/statuses/create.html:9
+#: tasks/templates/tasks/create.html:8
+msgid "Create"
+msgstr "Создать"
+
+#: labels/templates/labels/delete.html:3 labels/templates/labels/delete.html:4
+#| msgid "Delete task"
+msgid "Delete label"
+msgstr "Удалить метку"
+
+#: labels/templates/labels/index.html:4 labels/templates/labels/index.html:5
+#: task_manager/templates/layout/base.html:42 tasks/forms.py:33
+#: tasks/templates/tasks/detail.html:31
+msgid "Labels"
+msgstr "Метки"
+
+#: labels/templates/labels/index.html:14
+#: statuses/templates/statuses/index.html:19
+#: tasks/templates/tasks/index.html:18 users/templates/users/index.html:10
+msgid "ID"
+msgstr "ID"
+
+#: labels/templates/labels/index.html:16
+#: statuses/templates/statuses/index.html:27
+#: tasks/templates/tasks/detail.html:26 tasks/templates/tasks/index.html:23
+#: users/templates/users/index.html:22
+msgid "Date created"
+msgstr "Дата создания"
+
+#: labels/templates/labels/index.html:17
+#: statuses/templates/statuses/index.html:31
+#: tasks/templates/tasks/index.html:24 users/templates/users/index.html:26
+msgid "Actions"
+msgstr "Действия"
+
+#: labels/templates/labels/index.html:27 labels/templates/labels/update.html:5
+#: statuses/templates/statuses/index.html:52
+#: statuses/templates/statuses/update.html:9
+#: tasks/templates/tasks/detail.html:43 tasks/templates/tasks/index.html:38
+#: tasks/templates/tasks/update.html:8 users/templates/users/index.html:51
+#: users/templates/users/update.html:9
+msgid "Edit"
+msgstr "Изменить"
+
+#: labels/templates/labels/index.html:28
+#: statuses/templates/statuses/index.html:55
+#: tasks/templates/tasks/detail.html:46 tasks/templates/tasks/index.html:39
+#: users/templates/users/index.html:55
+msgid "Delete"
+msgstr "Удалить"
+
+#: labels/templates/labels/index.html:35
+#| msgid "No tasks yet"
+msgid "No labels yet"
+msgstr "Меток пока нет"
+
+#: labels/templates/labels/update.html:3 labels/templates/labels/update.html:4
+#| msgid "Edit task"
+msgid "Edit label"
+msgstr "Изменить метку"
+
+#: labels/views.py:25
+#| msgid "Task successfully created"
+msgid "Label successfully created"
+msgstr "Метка успешно создана"
+
+#: labels/views.py:36
+#| msgid "Task successfully updated"
+msgid "Label successfully updated"
+msgstr "Метка успешно изменена"
+
+#: labels/views.py:48
+#| msgid "Unable to delete user"
+msgid "Unable to delete label"
+msgstr "Невозможно удалить метку"
+
+#: labels/views.py:51
+#| msgid "Task successfully deleted"
+msgid "Label successfully deleted"
+msgstr "Метка успешно удалена"
 
 #: statuses/forms.py:13 statuses/tests.py:73
 msgid "A status with this name already exists."
@@ -32,11 +126,6 @@ msgstr "Статус с таким именем уже существует."
 msgid "Create status"
 msgstr "Создать статус"
 
-#: statuses/templates/statuses/create.html:9
-#: tasks/templates/tasks/create.html:8
-msgid "Create"
-msgstr "Создать"
-
 #: statuses/templates/statuses/delete.html:4
 #: statuses/templates/statuses/delete.html:6
 msgid "Delete status"
@@ -47,36 +136,6 @@ msgstr "Удалить статус"
 #: task_manager/templates/layout/base.html:35
 msgid "Statuses"
 msgstr "Статусы"
-
-#: statuses/templates/statuses/index.html:19
-#: tasks/templates/tasks/index.html:18 users/templates/users/index.html:10
-msgid "ID"
-msgstr "ID"
-
-#: statuses/templates/statuses/index.html:27
-#: tasks/templates/tasks/detail.html:26 tasks/templates/tasks/index.html:23
-#: users/templates/users/index.html:22
-msgid "Date created"
-msgstr "Дата создания"
-
-#: statuses/templates/statuses/index.html:31
-#: tasks/templates/tasks/index.html:24 users/templates/users/index.html:26
-msgid "Actions"
-msgstr "Действия"
-
-#: statuses/templates/statuses/index.html:52
-#: statuses/templates/statuses/update.html:9
-#: tasks/templates/tasks/detail.html:43 tasks/templates/tasks/index.html:38
-#: tasks/templates/tasks/update.html:8 users/templates/users/index.html:51
-#: users/templates/users/update.html:9
-msgid "Edit"
-msgstr "Изменить"
-
-#: statuses/templates/statuses/index.html:55
-#: tasks/templates/tasks/detail.html:46 tasks/templates/tasks/index.html:39
-#: users/templates/users/index.html:55
-msgid "Delete"
-msgstr "Удалить"
 
 #: statuses/templates/statuses/index.html:65
 msgid "No statuses yet"
@@ -139,25 +198,25 @@ msgstr "Узнать больше"
 msgid "Users"
 msgstr "Пользователи"
 
-#: task_manager/templates/layout/base.html:42
+#: task_manager/templates/layout/base.html:49
 #: tasks/templates/tasks/index.html:4 tasks/templates/tasks/index.html:6
 msgid "Tasks"
 msgstr "Задачи"
 
-#: task_manager/templates/layout/base.html:55
+#: task_manager/templates/layout/base.html:62
 msgid "Log out"
 msgstr "Выход"
 
-#: task_manager/templates/layout/base.html:63
+#: task_manager/templates/layout/base.html:70
 #: task_manager/templates/login.html:4 task_manager/templates/login.html:6
 msgid "Log in"
 msgstr "Вход"
 
-#: task_manager/templates/layout/base.html:70
+#: task_manager/templates/layout/base.html:77
 msgid "Sign up"
 msgstr "Регистрация"
 
-#: task_manager/templates/layout/base.html:104
+#: task_manager/templates/layout/base.html:111
 msgid "Hexlet"
 msgstr "Hexlet"
 
@@ -199,10 +258,6 @@ msgstr "Статус"
 #: tasks/templates/tasks/index.html:22
 msgid "Executor"
 msgstr "Исполнитель"
-
-#: tasks/forms.py:33 tasks/templates/tasks/detail.html:31
-msgid "Labels"
-msgstr "Метки"
 
 #: tasks/templates/tasks/create.html:4 tasks/templates/tasks/create.html:5
 #: tasks/templates/tasks/index.html:13
