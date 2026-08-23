@@ -1,0 +1,51 @@
+{% extends "layout/page.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Task view" %}{% endblock %}
+{% block page_heading %}{% translate "Task view" %}{% endblock %}
+
+{% block page_content %}
+    <article class="overflow-hidden rounded border border-slate-200">
+        <h2 class="bg-slate-600 px-4 py-3 text-2xl font-bold text-white">
+            {{ object.name }}
+        </h2>
+
+        <div class="p-4 bg-gray-50">
+            <p>{{ object.description|default:"—" }}</p>
+
+            <dl class="mt-4 grid grid-cols-[1fr_1fr] gap-y-3 border-t border-slate-300 pt-4">
+                <dt>{% translate "Author" %}</dt>
+                <dd>{{ object.author.get_full_name|default:object.author.username }}</dd>
+
+                <dt>{% translate "Executor" %}</dt>
+                <dd>{{ object.executor.get_full_name|default:object.executor.username }}</dd>
+
+                <dt>{% translate "Status" %}</dt>
+                <dd>{{ object.status }}</dd>
+
+                <dt>{% translate "Date created" %}</dt>
+                <dd>{{ object.created_at|date:"d.m.Y H:i" }}</dd>
+            </dl>
+
+            <div class="mt-4">
+                <h3 class="font-bold">{% translate "Labels" %}:</h3>
+                <ul class="list-inside list-disc">
+                    {% for label in object.labels.all %}
+                        <li>{{ label }}</li>
+                    {% empty %}
+                        <li>—</li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+            <div class="mt-5 flex gap-4">
+                <a href="{% url 'tasks_update' object.pk %}" class="text-blue-600 hover:text-blue-800">
+                    {% translate "Edit" %}
+                </a>
+                <a href="{% url 'tasks_delete' object.pk %}" class="text-blue-600 hover:text-blue-800">
+                    {% translate "Delete" %}
+                </a>
+            </div>
+        </div>
+    </article>
+{% endblock %}

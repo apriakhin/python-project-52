@@ -1,0 +1,10 @@
+{% extends "layout/page.html" %}
+{% load i18n %}
+
+{% block title %}{% translate "Create task" %}{% endblock %}
+{% block page_heading %}{% translate "Create task" %}{% endblock %}
+
+{% block page_content %}
+    {% translate "Create" as submit_label %}
+    {% include "layout/form.html" with form=form submit_label=submit_label %}
+{% endblock %}

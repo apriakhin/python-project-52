@@ -2,6 +2,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.contrib import messages
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models.deletion import ProtectedError
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
 from django.utils.translation import gettext_lazy as _
@@ -68,5 +69,11 @@ class DeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return super().handle_no_permission()
 
     def form_valid(self, form):
+        try:
+            response = super().form_valid(form)
+        except ProtectedError:
+            messages.error(self.request, _('Unable to delete user'))
+            return redirect('users_index')
+
         messages.success(self.request, _('User successfully deleted'))
-        return super().form_valid(form)
+        return response

@@ -39,6 +39,9 @@ class StatusTests(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.status.name)
 
+    def test_status_string_representation(self):
+        self.assertEqual(str(self.status), self.status.name)
+
     def test_user_can_create_status(self):
         self.client.force_login(self.user)
 
