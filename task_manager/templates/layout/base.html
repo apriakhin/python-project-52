@@ -81,7 +81,7 @@
             </nav>
         </header>
 
-        <main class="mx-auto w-full max-w-5xl flex-1">
+        <main class="mx-auto w-full max-w-5xl flex-1 px-4">
             {% if messages %}
                 <div class="space-y-3 pt-4">
                     {% for message in messages %}
@@ -107,7 +107,7 @@
             {% block content %}{% endblock %}
         </main>
 
-        <footer class="mx-auto h-20 w-full max-w-5xl shrink-0 border-t border-gray-300 pt-5 text-base leading-6">
+        <footer class="mx-auto h-20 w-full max-w-5xl shrink-0 border-t border-gray-300 px-4 pt-5 text-base leading-6">
             {% translate "Hexlet" %}
         </footer>
     </div>

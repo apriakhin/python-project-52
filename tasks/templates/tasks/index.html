@@ -14,27 +14,72 @@
     </a>
 {% endblock %}
 
+{% block table_before %}
+    <form method="get" class="mt-4 rounded border border-slate-200 bg-slate-50 p-4">
+        <div class="flex flex-wrap items-center gap-x-4 gap-y-4">
+            <div class="flex items-center gap-1">
+                <label for="{{ filter_form.status.id_for_label }}">{{ filter_form.status.label }}:</label>
+                {{ filter_form.status }}
+            </div>
+            <div class="flex items-center gap-1">
+                <label for="{{ filter_form.executor.id_for_label }}">{{ filter_form.executor.label }}:</label>
+                {{ filter_form.executor }}
+            </div>
+        </div>
+
+        <div class="mt-4 flex flex-wrap items-center gap-x-4 gap-y-4">
+            <div class="flex items-center gap-1">
+                <label for="{{ filter_form.label.id_for_label }}">{{ filter_form.label.label }}:</label>
+                {{ filter_form.label }}
+            </div>
+            <label class="flex items-center gap-1">
+                {{ filter_form.self_tasks }}
+                <span>{{ filter_form.self_tasks.label }}:</span>
+            </label>
+            <button type="submit" class="rounded bg-blue-600 px-4 py-2 text-white hover:bg-blue-700">
+                {% translate "Show" %}
+            </button>
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block table_layout %}table-fixed{% endblock %}
+
+{% block table_colgroup %}
+    <colgroup>
+        <col style="width: 4%">
+        <col style="width: 19%">
+        <col style="width: 17%">
+        <col style="width: 19%">
+        <col style="width: 19%">
+        <col style="width: 13%">
+        <col style="width: 9%">
+    </colgroup>
+{% endblock %}
+
 {% block table_columns %}
     <th class="px-3 py-2 font-bold">{% translate "ID" %}</th>
     <th class="px-3 py-2 font-bold">{% translate "Name" %}</th>
     <th class="px-3 py-2 font-bold">{% translate "Status" %}</th>
     <th class="px-3 py-2 font-bold">{% translate "Author" %}</th>
     <th class="px-3 py-2 font-bold">{% translate "Executor" %}</th>
-    <th class="whitespace-nowrap px-3 py-2 font-bold">{% translate "Date created" %}</th>
+    <th class="px-3 py-2 font-bold">{% translate "Date created" %}</th>
     <th class="px-3 py-2"><span class="sr-only">{% translate "Actions" %}</span></th>
 {% endblock %}
 
 {% block table_row %}
     <tr class="border-b border-gray-200 odd:bg-gray-50">
         <td class="px-3 py-2 align-top">{{ item.id }}</td>
-        <td class="px-3 py-2 align-top">{{ item.name }}</td>
+        <td class="break-words px-3 py-2 align-top">
+            <a href="{% url 'tasks_detail' item.id %}" class="text-blue-600 hover:text-blue-800">{{ item.name }}</a>
+        </td>
         <td class="px-3 py-2 align-top">{{ item.status }}</td>
         <td class="px-3 py-2 align-top">{{ item.author.get_full_name|default:item.author.username }}</td>
         <td class="px-3 py-2 align-top">{{ item.executor.get_full_name|default:item.executor.username }}</td>
-        <td class="whitespace-nowrap px-3 py-2 align-top">{{ item.created_at|date:"d.m.Y H:i" }}</td>
+        <td class="px-3 py-2 align-top">{{ item.created_at|date:"d.m.Y H:i" }}</td>
         <td class="whitespace-nowrap px-3 py-2 align-top">
             <div class="flex flex-col items-start">
-                <a href="{% url 'tasks_detail' item.id %}" class="text-blue-600 hover:text-blue-800">{% translate "Show" %}</a>
                 <a href="{% url 'tasks_update' item.id %}" class="text-blue-600 hover:text-blue-800">{% translate "Edit" %}</a>
                 <a href="{% url 'tasks_delete' item.id %}" class="text-blue-600 hover:text-blue-800">{% translate "Delete" %}</a>
             </div>

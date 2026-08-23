@@ -11,7 +11,7 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .forms import TaskForm
+from .forms import TaskFilterForm, TaskForm
 from .models import Task
 
 
@@ -20,12 +20,35 @@ class IndexView(LoginRequiredMixin, ListView):
     template_name = 'tasks/index.html'
     context_object_name = 'tasks'
 
+    def get_filter_form(self):
+        return TaskFilterForm(self.request.GET or None)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['filter_form'] = self.get_filter_form()
+        return context
+
     def get_queryset(self):
-        return Task.objects.select_related(
+        queryset = Task.objects.select_related(
             'author',
             'executor',
             'status',
         ).prefetch_related('labels')
+        filter_form = self.get_filter_form()
+
+        if not filter_form.is_valid():
+            return queryset
+
+        if status := filter_form.cleaned_data['status']:
+            queryset = queryset.filter(status=status)
+        if executor := filter_form.cleaned_data['executor']:
+            queryset = queryset.filter(executor=executor)
+        if label := filter_form.cleaned_data['label']:
+            queryset = queryset.filter(labels=label)
+        if filter_form.cleaned_data['self_tasks']:
+            queryset = queryset.filter(author=self.request.user)
+
+        return queryset.distinct()
 
 
 class CreateView(LoginRequiredMixin, CreateView):

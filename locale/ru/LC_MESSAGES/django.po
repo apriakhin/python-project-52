@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Task Manager 0.1.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-08-23 13:05+0000\n"
+"POT-Creation-Date: 2026-08-23 14:15+0000\n"
 "PO-Revision-Date: 2026-08-18 19:01+0000\n"
 "Language-Team: Russian\n"
 "Language: ru\n"
@@ -19,18 +19,16 @@ msgstr ""
 
 #: labels/forms.py:11 labels/templates/labels/index.html:15
 #: statuses/forms.py:11 statuses/templates/statuses/index.html:23
-#: tasks/forms.py:13 tasks/templates/tasks/index.html:19
+#: tasks/forms.py:13 tasks/templates/tasks/index.html:63
 msgid "Name"
 msgstr "Имя"
 
-#: labels/forms.py:13
-#| msgid "A task with this name already exists."
+#: labels/forms.py:13 labels/tests.py:66
 msgid "A label with this name already exists."
 msgstr "Метка с таким именем уже существует."
 
 #: labels/templates/labels/create.html:3 labels/templates/labels/create.html:4
 #: labels/templates/labels/index.html:9 labels/tests.py:42
-#| msgid "Create task"
 msgid "Create label"
 msgstr "Создать метку"
 
@@ -41,39 +39,38 @@ msgid "Create"
 msgstr "Создать"
 
 #: labels/templates/labels/delete.html:3 labels/templates/labels/delete.html:4
-#| msgid "Delete task"
 msgid "Delete label"
 msgstr "Удалить метку"
 
 #: labels/templates/labels/index.html:4 labels/templates/labels/index.html:5
-#: task_manager/templates/layout/base.html:42 tasks/forms.py:33
+#: task_manager/templates/layout/base.html:42 tasks/forms.py:35
 #: tasks/templates/tasks/detail.html:31
 msgid "Labels"
 msgstr "Метки"
 
 #: labels/templates/labels/index.html:14
 #: statuses/templates/statuses/index.html:19
-#: tasks/templates/tasks/index.html:18 users/templates/users/index.html:10
+#: tasks/templates/tasks/index.html:62 users/templates/users/index.html:10
 msgid "ID"
 msgstr "ID"
 
 #: labels/templates/labels/index.html:16
 #: statuses/templates/statuses/index.html:27
-#: tasks/templates/tasks/detail.html:26 tasks/templates/tasks/index.html:23
+#: tasks/templates/tasks/detail.html:26 tasks/templates/tasks/index.html:67
 #: users/templates/users/index.html:22
 msgid "Date created"
 msgstr "Дата создания"
 
 #: labels/templates/labels/index.html:17
 #: statuses/templates/statuses/index.html:31
-#: tasks/templates/tasks/index.html:24 users/templates/users/index.html:26
+#: tasks/templates/tasks/index.html:68 users/templates/users/index.html:26
 msgid "Actions"
 msgstr "Действия"
 
 #: labels/templates/labels/index.html:27 labels/templates/labels/update.html:5
 #: statuses/templates/statuses/index.html:52
 #: statuses/templates/statuses/update.html:9
-#: tasks/templates/tasks/detail.html:43 tasks/templates/tasks/index.html:38
+#: tasks/templates/tasks/detail.html:43 tasks/templates/tasks/index.html:83
 #: tasks/templates/tasks/update.html:8 users/templates/users/index.html:51
 #: users/templates/users/update.html:9
 msgid "Edit"
@@ -81,38 +78,32 @@ msgstr "Изменить"
 
 #: labels/templates/labels/index.html:28
 #: statuses/templates/statuses/index.html:55
-#: tasks/templates/tasks/detail.html:46 tasks/templates/tasks/index.html:39
+#: tasks/templates/tasks/detail.html:46 tasks/templates/tasks/index.html:84
 #: users/templates/users/index.html:55
 msgid "Delete"
 msgstr "Удалить"
 
 #: labels/templates/labels/index.html:35
-#| msgid "No tasks yet"
 msgid "No labels yet"
 msgstr "Меток пока нет"
 
 #: labels/templates/labels/update.html:3 labels/templates/labels/update.html:4
-#| msgid "Edit task"
 msgid "Edit label"
 msgstr "Изменить метку"
 
 #: labels/views.py:25
-#| msgid "Task successfully created"
 msgid "Label successfully created"
 msgstr "Метка успешно создана"
 
 #: labels/views.py:36
-#| msgid "Task successfully updated"
 msgid "Label successfully updated"
 msgstr "Метка успешно изменена"
 
 #: labels/views.py:48
-#| msgid "Unable to delete user"
 msgid "Unable to delete label"
 msgstr "Невозможно удалить метку"
 
 #: labels/views.py:51
-#| msgid "Task successfully deleted"
 msgid "Label successfully deleted"
 msgstr "Метка успешно удалена"
 
@@ -162,12 +153,12 @@ msgstr "Невозможно удалить статус"
 msgid "Status successfully deleted"
 msgstr "Статус успешно удален"
 
-#: task_manager/forms.py:25 users/forms.py:20
+#: task_manager/forms.py:26 users/forms.py:20
 #: users/templates/users/index.html:14
 msgid "Username"
 msgstr "Имя пользователя"
 
-#: task_manager/forms.py:26 users/forms.py:23
+#: task_manager/forms.py:27 users/forms.py:23
 msgid "Password"
 msgstr "Пароль"
 
@@ -241,7 +232,7 @@ msgstr "Вы залогинены"
 msgid "You are logged out"
 msgstr "Вы разлогинены"
 
-#: tasks/forms.py:15 tasks/tests.py:117
+#: tasks/forms.py:15 tasks/tests.py:155
 msgid "A task with this name already exists."
 msgstr "Задача с таким именем уже существует."
 
@@ -249,15 +240,28 @@ msgstr "Задача с таким именем уже существует."
 msgid "Description"
 msgstr "Описание"
 
-#: tasks/forms.py:24 tasks/templates/tasks/detail.html:23
-#: tasks/templates/tasks/index.html:20
+#: tasks/forms.py:24 tasks/forms.py:47 tasks/templates/tasks/detail.html:23
+#: tasks/templates/tasks/index.html:64
 msgid "Status"
 msgstr "Статус"
 
-#: tasks/forms.py:28 tasks/templates/tasks/detail.html:20
-#: tasks/templates/tasks/index.html:22
+#: tasks/forms.py:26 tasks/forms.py:32 tasks/forms.py:50 tasks/forms.py:57
+#: tasks/forms.py:64
+msgid "Not selected"
+msgstr "Не выбрано"
+
+#: tasks/forms.py:29 tasks/forms.py:54 tasks/templates/tasks/detail.html:20
+#: tasks/templates/tasks/index.html:66
 msgid "Executor"
 msgstr "Исполнитель"
+
+#: tasks/forms.py:61
+msgid "Label"
+msgstr "Метка"
+
+#: tasks/forms.py:68
+msgid "Only own tasks"
+msgstr "Только свои задачи"
 
 #: tasks/templates/tasks/create.html:4 tasks/templates/tasks/create.html:5
 #: tasks/templates/tasks/index.html:13
@@ -272,15 +276,15 @@ msgstr "Удалить задачу"
 msgid "Task view"
 msgstr "Просмотр задачи"
 
-#: tasks/templates/tasks/detail.html:17 tasks/templates/tasks/index.html:21
+#: tasks/templates/tasks/detail.html:17 tasks/templates/tasks/index.html:65
 msgid "Author"
 msgstr "Автор"
 
-#: tasks/templates/tasks/index.html:37
+#: tasks/templates/tasks/index.html:40
 msgid "Show"
 msgstr "Показать"
 
-#: tasks/templates/tasks/index.html:48
+#: tasks/templates/tasks/index.html:93
 msgid "No tasks yet"
 msgstr "Задач пока нет"
 
@@ -288,19 +292,19 @@ msgstr "Задач пока нет"
 msgid "Edit task"
 msgstr "Изменить задачу"
 
-#: tasks/views.py:39
+#: tasks/views.py:62
 msgid "Task successfully created"
 msgstr "Задача успешно создана"
 
-#: tasks/views.py:50
+#: tasks/views.py:73
 msgid "Task successfully updated"
 msgstr "Задача успешно изменена"
 
-#: tasks/views.py:72
+#: tasks/views.py:95
 msgid "Only the task author can delete it"
 msgstr "Задачу может удалить только ее автор"
 
-#: tasks/views.py:79
+#: tasks/views.py:102
 msgid "Task successfully deleted"
 msgstr "Задача успешно удалена"
 

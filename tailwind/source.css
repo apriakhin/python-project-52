@@ -5,3 +5,7 @@
 }
 
 @source "../task_manager";
+@source "../users";
+@source "../statuses";
+@source "../labels";
+@source "../tasks";

@@ -26,7 +26,9 @@ class TaskTests(TestCase):
             password='password',
         )
         self.status = Status.objects.create(name='В работе')
+        self.other_status = Status.objects.create(name='Завершена')
         self.label = Label.objects.create(name='Срочно')
+        self.other_label = Label.objects.create(name='Документация')
         self.task = Task.objects.create(
             name='Подготовить релиз',
             description='Проверить изменения перед выпуском.',
@@ -35,6 +37,13 @@ class TaskTests(TestCase):
             executor=self.executor,
         )
         self.task.labels.add(self.label)
+        self.other_task = Task.objects.create(
+            name='Обновить документацию',
+            status=self.other_status,
+            author=self.other_user,
+            executor=self.other_user,
+        )
+        self.other_task.labels.add(self.other_label)
 
     def assert_message(self, response, message):
         response_messages = [
@@ -70,6 +79,35 @@ class TaskTests(TestCase):
         self.assertContains(list_response, self.task.name)
         self.assertContains(detail_response, self.task.description)
         self.assertContains(detail_response, self.label.name)
+
+    def test_user_can_filter_tasks_by_status_executor_and_label(self):
+        self.client.force_login(self.author)
+
+        test_cases = [
+            ('status', self.status.pk),
+            ('executor', self.executor.pk),
+            ('label', self.label.pk),
+        ]
+
+        for field, value in test_cases:
+            with self.subTest(field=field):
+                response = self.client.get(
+                    reverse('tasks_index'),
+                    {field: value},
+                )
+                self.assertContains(response, self.task.name)
+                self.assertNotContains(response, self.other_task.name)
+
+    def test_user_can_filter_own_tasks(self):
+        self.client.force_login(self.author)
+
+        response = self.client.get(
+            reverse('tasks_index'),
+            {'self_tasks': 'on'},
+        )
+
+        self.assertContains(response, self.task.name)
+        self.assertNotContains(response, self.other_task.name)
 
     def test_user_can_create_task(self):
         self.client.force_login(self.author)

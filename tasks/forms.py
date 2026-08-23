@@ -23,11 +23,13 @@ class TaskForm(TailwindFormMixin, forms.ModelForm):
     status = forms.ModelChoiceField(
         label=_('Status'),
         queryset=Task._meta.get_field('status').related_model.objects.all(),
+        empty_label=_('Not selected'),
     )
     executor = forms.ModelChoiceField(
         label=_('Executor'),
         queryset=get_user_model().objects.all(),
         required=False,
+        empty_label=_('Not selected'),
     )
     labels = forms.ModelMultipleChoiceField(
         label=_('Labels'),
@@ -38,3 +40,32 @@ class TaskForm(TailwindFormMixin, forms.ModelForm):
     class Meta:
         model = Task
         fields = ['name', 'description', 'status', 'executor', 'labels']
+
+
+class TaskFilterForm(TailwindFormMixin, forms.Form):
+    status = forms.ModelChoiceField(
+        label=_('Status'),
+        queryset=Task._meta.get_field('status').related_model.objects.all(),
+        required=False,
+        empty_label=_('Not selected'),
+        widget=forms.Select(attrs={'class': 'w-60'}),
+    )
+    executor = forms.ModelChoiceField(
+        label=_('Executor'),
+        queryset=get_user_model().objects.all(),
+        required=False,
+        empty_label=_('Not selected'),
+        widget=forms.Select(attrs={'class': 'w-72'}),
+    )
+    label = forms.ModelChoiceField(
+        label=_('Label'),
+        queryset=Label.objects.all(),
+        required=False,
+        empty_label=_('Not selected'),
+        widget=forms.Select(attrs={'class': 'w-56'}),
+    )
+    self_tasks = forms.BooleanField(
+        label=_('Only own tasks'),
+        required=False,
+        widget=forms.CheckboxInput(attrs={'class': 'h-4 w-4'}),
+    )

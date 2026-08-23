@@ -2,8 +2,10 @@
 
 {% block page_content %}
 {% block page_actions %}{% endblock %}
+{% block table_before %}{% endblock %}
 
 <table class="mt-6 w-full {% block table_layout %}table-auto{% endblock %} border-collapse text-left">
+    {% block table_colgroup %}{% endblock %}
     <thead class="border-b border-gray-300">
         <tr>
             {% block table_columns %}{% endblock %}

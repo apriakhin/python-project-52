@@ -13,8 +13,9 @@ class TailwindFormMixin:
                 continue
 
             current_class = field.widget.attrs.get('class', '')
+            default_class = 'block' if current_class else self.widget_class
             field.widget.attrs['class'] = (
-                f'{current_class} {self.widget_class}'.strip()
+                f'{current_class} {default_class}'.strip()
             )
 
 
