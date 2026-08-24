@@ -1,3 +1,7 @@
+import os
+
+os.environ['SENTRY_DSN'] = ''
+
 from . import settings as base_settings
 from .settings import *  # noqa: F403
 
