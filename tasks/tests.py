@@ -8,6 +8,7 @@ from labels.models import Label
 from statuses.models import Status
 
 from .models import Task
+from .forms import TaskForm
 
 
 class TaskTests(TestCase):
@@ -19,6 +20,8 @@ class TaskTests(TestCase):
         )
         self.executor = user_model.objects.create_user(
             username='executor',
+            first_name='Executor',
+            last_name='User',
             password='password',
         )
         self.other_user = user_model.objects.create_user(
@@ -79,6 +82,26 @@ class TaskTests(TestCase):
         self.assertContains(list_response, self.task.name)
         self.assertContains(detail_response, self.task.description)
         self.assertContains(detail_response, self.label.name)
+
+    def test_task_without_executor_is_displayed_and_form_uses_full_name(self):
+        task = Task.objects.create(
+            name='Задача без исполнителя',
+            status=self.status,
+            author=self.author,
+        )
+        self.client.force_login(self.author)
+
+        list_response = self.client.get(reverse('tasks_index'))
+        detail_response = self.client.get(
+            reverse('tasks_detail', args=[task.pk]),
+        )
+
+        self.assertContains(list_response, task.name)
+        self.assertContains(detail_response, task.name)
+        self.assertIn(
+            (self.executor.pk, 'Executor User'),
+            list(TaskForm().fields['executor'].choices),
+        )
 
     def test_user_can_filter_tasks_by_status_executor_and_label(self):
         self.client.force_login(self.author)

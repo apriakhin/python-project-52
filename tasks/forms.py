@@ -8,6 +8,11 @@ from task_manager.forms import TailwindFormMixin
 from .models import Task
 
 
+class UserChoiceField(forms.ModelChoiceField):
+    def label_from_instance(self, user):
+        return user.get_full_name() or user.username
+
+
 class TaskForm(TailwindFormMixin, forms.ModelForm):
     name = forms.CharField(
         label=_('Name'),
@@ -25,7 +30,7 @@ class TaskForm(TailwindFormMixin, forms.ModelForm):
         queryset=Task._meta.get_field('status').related_model.objects.all(),
         empty_label=_('Not selected'),
     )
-    executor = forms.ModelChoiceField(
+    executor = UserChoiceField(
         label=_('Executor'),
         queryset=get_user_model().objects.all(),
         required=False,
@@ -50,7 +55,7 @@ class TaskFilterForm(TailwindFormMixin, forms.Form):
         empty_label=_('Not selected'),
         widget=forms.Select(attrs={'class': 'w-60'}),
     )
-    executor = forms.ModelChoiceField(
+    executor = UserChoiceField(
         label=_('Executor'),
         queryset=get_user_model().objects.all(),
         required=False,

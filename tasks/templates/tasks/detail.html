@@ -18,7 +18,13 @@
                 <dd>{{ object.author.get_full_name|default:object.author.username }}</dd>
 
                 <dt>{% translate "Executor" %}</dt>
-                <dd>{{ object.executor.get_full_name|default:object.executor.username }}</dd>
+                <dd>
+                    {% if object.executor %}
+                        {{ object.executor.get_full_name|default:object.executor.username }}
+                    {% else %}
+                        —
+                    {% endif %}
+                </dd>
 
                 <dt>{% translate "Status" %}</dt>
                 <dd>{{ object.status }}</dd>
