@@ -43,6 +43,7 @@ if SENTRY_DSN:
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    'localhost',
     'python-project-52-0wbl.onrender.com',
     'webserver',
 ]
