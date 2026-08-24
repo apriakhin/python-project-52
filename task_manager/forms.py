@@ -12,6 +12,7 @@ class TailwindFormMixin:
             if field.widget.is_hidden:
                 continue
 
+            field.widget.attrs.setdefault('aria-label', str(field.label))
             current_class = field.widget.attrs.get('class', '')
             default_class = 'block' if current_class else self.widget_class
             field.widget.attrs['class'] = (
